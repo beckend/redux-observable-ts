@@ -17,7 +17,6 @@
 ### Testing
 Supports:
 - `jest`, needs `jest-cli` installed. it will execute the transpiled files from typescript.
-- `npm run docker-test` requires `docker`, `docker-compose` to be installed.
 
 ### Dist
 - `gulp` will run default task which consist of running tasks:
