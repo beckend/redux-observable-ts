@@ -17,8 +17,7 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
-    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "docker-test": "docker-compose -f docker-compose.test.yml up"
+    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/ts-jest/preprocessor.js",
