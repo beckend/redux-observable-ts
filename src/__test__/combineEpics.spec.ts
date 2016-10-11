@@ -4,9 +4,9 @@ import { combineEpics, ActionsObservable } from '../';
 import { Subject } from 'rxjs/Subject';
 import { Action } from 'redux-actions';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toArray';
+// import 'rxjs/add/operator/toArray';
 // import { map } from 'rxjs/operator/map';
-// import { toArray } from 'rxjs/operator/toArray';
+import { toArray } from 'rxjs/operator/toArray';
 import {
   IEpic,
 } from '../model';
@@ -54,7 +54,7 @@ describe('combineEpics', () => {
       epic2
     );
 
-    rootEpic(1, 2, 3, 4).toArray().subscribe((values) => {
+    toArray.call(rootEpic(1, 2, 3, 4)).subscribe((values: any) => {
       expect(values).to.deep.equal(['first', 'second']);
 
       expect(epic1.callCount).to.equal(1);

@@ -33,8 +33,7 @@ export class ActionsObservable<T extends TAction> extends Observable<T> {
   }
 
   public ofType(...keys: string[]): Observable<T> {
-    const filterFn = filter.bind(this);
-    return filterFn(({ type }: T) => {
+    return filter.call(this, ({ type }: T) => {
       const len = keys.length;
       if (len === 1) {
         return type === keys[0];
