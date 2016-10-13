@@ -22,7 +22,7 @@
         "./**/*.ts",
         "./**/*.tsx"
     ],
-    "exlcude": [
+    "exclude": [
         "./**/*.spec.ts",
         "./**/*.spec.tsx"
     ]
