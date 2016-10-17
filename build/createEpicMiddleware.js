@@ -20,8 +20,6 @@ function createEpicMiddleware(epic, _a) {
     var input$ = new Subject_1.Subject();
     var action$ = adapter.input(new ActionsObservable_1.ActionsObservable(input$));
     var epic$ = new Subject_1.Subject();
-    // const eMap = map.bind(epic$);
-    // const eSwitchMap = switchMap.bind(epic$);
     var store;
     var epicMiddleware = function (_store) {
         store = _store;

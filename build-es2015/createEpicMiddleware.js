@@ -19,8 +19,6 @@ function createEpicMiddleware(epic, { adapter = defaultAdapter } = defaultOption
     const input$ = new Subject_1.Subject();
     const action$ = adapter.input(new ActionsObservable_1.ActionsObservable(input$));
     const epic$ = new Subject_1.Subject();
-    // const eMap = map.bind(epic$);
-    // const eSwitchMap = switchMap.bind(epic$);
     let store;
     const epicMiddleware = (_store) => {
         store = _store;

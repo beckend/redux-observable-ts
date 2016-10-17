@@ -40,8 +40,6 @@ export function createEpicMiddleware<TAction extends Action<any>, TStoreState>(
     new ActionsObservable(input$)
   );
   const epic$ = new Subject();
-  // const eMap = map.bind(epic$);
-  // const eSwitchMap = switchMap.bind(epic$);
 
   let store: Store<any>;
   const epicMiddleware = (_store: Store<any>) => {
