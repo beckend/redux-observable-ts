@@ -1,8 +1,7 @@
 /// <reference types="redux-actions" />
 import { Action } from 'redux-actions';
 import { IEpicAdapter, IEpic, IEpicMiddleware } from './model';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
+import './rxjs/add/__invoke';
 export interface IDefaultOptions {
     adapter: IEpicAdapter;
 }

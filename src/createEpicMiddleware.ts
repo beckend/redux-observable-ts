@@ -12,10 +12,9 @@ import {
   IEpicMiddleware,
 } from './model';
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-// import { map } from 'rxjs/operator/map';
-// import { switchMap } from 'rxjs/operator/switchMap';
+import './rxjs/add/__invoke';
+import { map } from 'rxjs/operator/map';
+import { switchMap } from 'rxjs/operator/switchMap';
 
 const defaultAdapter: IEpicAdapter = {
   input: (action$: any) => action$,
@@ -50,8 +49,8 @@ export function createEpicMiddleware<TAction extends Action<any>, TStoreState>(
 
     return (next: Dispatch<TAction>) => {
       epic$
-        .map((epicArg: IEpic<any, any>) => epicArg(action$, store))
-        .switchMap((actionArg$: ActionsObservable<TAction>) => adapter.output(actionArg$))
+        .__invoke(map, (epicArg: IEpic<any, any>) => epicArg(action$, store))
+        .__invoke(switchMap, (actionArg$: ActionsObservable<TAction>) => adapter.output(actionArg$))
         .subscribe(store.dispatch);
 
       // Setup initial root epic

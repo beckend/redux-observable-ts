@@ -2,10 +2,9 @@
 var ActionsObservable_1 = require('./ActionsObservable');
 var EPIC_END_1 = require('./EPIC_END');
 var Subject_1 = require('rxjs/Subject');
-require('rxjs/add/operator/map');
-require('rxjs/add/operator/switchMap');
-// import { map } from 'rxjs/operator/map';
-// import { switchMap } from 'rxjs/operator/switchMap';
+require('./rxjs/add/__invoke');
+var map_1 = require('rxjs/operator/map');
+var switchMap_1 = require('rxjs/operator/switchMap');
 var defaultAdapter = {
     input: function (action$) { return action$; },
     output: function (action$) { return action$; },
@@ -28,8 +27,8 @@ function createEpicMiddleware(epic, _a) {
         store = _store;
         return function (next) {
             epic$
-                .map(function (epicArg) { return epicArg(action$, store); })
-                .switchMap(function (actionArg$) { return adapter.output(actionArg$); })
+                .__invoke(map_1.map, function (epicArg) { return epicArg(action$, store); })
+                .__invoke(switchMap_1.switchMap, function (actionArg$) { return adapter.output(actionArg$); })
                 .subscribe(store.dispatch);
             // Setup initial root epic
             epic$.next(epic);
