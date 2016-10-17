@@ -3,7 +3,8 @@ import { expect } from 'chai';
 import { Subject } from 'rxjs/Subject';
 import { Action } from 'redux-actions';
 
-type TActionArr = Action<any>[];
+type TGenericAction = Action<any>;
+type TActionArr = TGenericAction[];
 
 describe('ActionsObservable', () => {
   it('should exist', () => {
@@ -21,8 +22,8 @@ describe('ActionsObservable', () => {
 
   describe('ofType operator', () => {
     it('should filter by action type', () => {
-      const actions = new Subject();
-      const actionsObs = new ActionsObservable(actions);
+      const actions = new Subject<any>();
+      const actionsObs = new ActionsObservable<any>(actions);
       const lulz: TActionArr = [];
       const haha: TActionArr = [];
 

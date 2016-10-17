@@ -3,25 +3,25 @@ import * as sinon from 'sinon';
 import { combineEpics, ActionsObservable } from '../';
 import { Subject } from 'rxjs/Subject';
 import { Action } from 'redux-actions';
-import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/toArray';
-// import { map } from 'rxjs/operator/map';
+import '../rxjs/add/__invoke';
+import { map } from 'rxjs/operator/map';
 import { toArray } from 'rxjs/operator/toArray';
 import {
   IEpic,
 } from '../model';
 
-type TActionArr = Action<any>[];
-type TGenericEpic = IEpic<any, any>;
+type TGenericAction = Action<any>;
+type TActionArr = TGenericAction[];
+type TGenericEpic = IEpic<TGenericAction, any>;
 
 describe('combineEpics', () => {
   it('should combine epics', () => {
     const epic1: TGenericEpic = (actions, store) =>
       actions.ofType('ACTION1')
-        .map((action) => ({ type: 'DELEGATED1', action, store }));
+        .__invoke(map, (action: TGenericAction) => ({ type: 'DELEGATED1', action, store }));
     const epic2: TGenericEpic = (actions, store) =>
       actions.ofType('ACTION2')
-        .map((action) => ({ type: 'DELEGATED2', action, store }));
+        .__invoke(map, (action: TGenericAction) => ({ type: 'DELEGATED2', action, store }));
 
     const epic = combineEpics(
       epic1,
@@ -29,8 +29,8 @@ describe('combineEpics', () => {
     );
 
     const store = { I: 'am', a: 'store' };
-    const subject = new Subject();
-    const actions = new ActionsObservable(subject);
+    const subject = new Subject<TGenericAction>();
+    const actions = new ActionsObservable<TGenericAction>(subject);
     const result = epic(actions, store);
     const emittedActions: TActionArr = [];
 
@@ -54,16 +54,18 @@ describe('combineEpics', () => {
       epic2
     );
 
-    toArray.call(rootEpic(1, 2, 3, 4)).subscribe((values: any) => {
-      expect(values).to.deep.equal(['first', 'second']);
+    rootEpic(1, 2, 3, 4)
+      .__invoke(toArray)
+      .subscribe((values: any) => {
+        expect(values).to.deep.equal(['first', 'second']);
 
-      expect(epic1.callCount).to.equal(1);
-      expect(epic2.callCount).to.equal(1);
+        expect(epic1.callCount).to.equal(1);
+        expect(epic2.callCount).to.equal(1);
 
-      expect(epic1.firstCall.args).to.deep.equal([1, 2, 3, 4]);
-      expect(epic2.firstCall.args).to.deep.equal([1, 2, 3, 4]);
+        expect(epic1.firstCall.args).to.deep.equal([1, 2, 3, 4]);
+        expect(epic2.firstCall.args).to.deep.equal([1, 2, 3, 4]);
 
-      done();
-    });
+        done();
+      });
   });
 });
