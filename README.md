@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/beckend/typescript-npm-boilerplate.svg?branch=master)](https://travis-ci.org/beckend/typescript-npm-boilerplate)
-[![Coverage Status](https://coveralls.io/repos/github/beckend/typescript-npm-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/beckend/typescript-npm-boilerplate?branch=master)
-[![Dependency Status](https://img.shields.io/david/beckend/typescript-npm-boilerplate.svg?maxAge=2592000)](https://david-dm.org/beckend/typescript-npm-boilerplate)
-[![DevDependency Status](https://img.shields.io/david/dev/beckend/typescript-npm-boilerplate.svg?maxAge=2592000)](https://david-dm.org/beckend/typescript-npm-boilerplate?type=dev)
+[![Build Status](https://travis-ci.org/beckend/redux-observable-ts.svg?branch=master)](https://travis-ci.org/beckend/redux-observable-ts)
+[![Coverage Status](https://coveralls.io/repos/github/beckend/redux-observable-ts/badge.svg?branch=master)](https://coveralls.io/github/beckend/redux-observable-ts?branch=master)
+[![Dependency Status](https://img.shields.io/david/beckend/redux-observable-ts.svg?maxAge=2592000)](https://david-dm.org/beckend/redux-observable-ts)
+[![DevDependency Status](https://img.shields.io/david/dev/beckend/redux-observable-ts.svg?maxAge=2592000)](https://david-dm.org/beckend/redux-observable-ts?type=dev)
 
 # A Boilerplate to create npm modules using typescript
 
