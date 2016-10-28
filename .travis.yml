@@ -11,7 +11,7 @@ before_script:
   - npm -g i gulp-cli jest-cli && npm -D i ts-jest@0.1.8
 
 script:
-  - jest --coverage --no-cache
+  - gulp ci
 
 sudo: false
 
