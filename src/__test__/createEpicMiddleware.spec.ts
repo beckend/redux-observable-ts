@@ -27,16 +27,19 @@ type TGenericAction = Action<any>;
 type TActionArr = TGenericAction[];
 
 describe('createEpicMiddleware', () => {
-  it('should provide epics a stream of action$ in and the "lite" store', () => {
+  it('should provide epics a stream of action$ in and the "lite" store', (done: jest.DoneCallback) => {
     const reducer: Reducer<any> = (state: TActionArr = [], action: TGenericAction) => state.concat(action);
     const epic = sinon.stub().returns(empty());
     const epicMiddleware = createEpicMiddleware(epic);
     const mockMiddleware: middlewareFn<any> = <S>(store: MiddlewareAPI<S>) => (next: Dispatch<S>) => (action: any) => {
-      (expect(epic).to.have.been as any).calledOnce();
+      // tslint:disable-next-line
+      expect(epic.calledOnce).to.be.true;
       expect(epic.firstCall.args[0]).to.be.instanceOf(ActionsObservable);
       expect(epic.firstCall.args[1]).to.equal(store);
+      done();
     };
-    createStore(reducer, applyMiddleware(epicMiddleware, mockMiddleware));
+    const store = createStore(reducer, applyMiddleware(epicMiddleware, mockMiddleware));
+    store.dispatch({ type: 'FIRST_ACTION_TO_TRIGGER_MIDDLEWARE' });
   });
 
   it('should accept an epic that wires up action$ input to action$ out', () => {
