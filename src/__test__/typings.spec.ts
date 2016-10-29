@@ -81,7 +81,7 @@ epicMiddleware2.replaceEpic(rootEpic1);
 
 store.dispatch({ type: 'FIRST' });
 store.dispatch({ type: 'SECOND' });
-// causes rxjs error...
+// causes rxjs error...needs a fix
 // store.dispatch({ type: 'FIFTH', payload: 'fifth-payload' });
 store.dispatch({ type: 'SIXTH', payload: 'sixth-payload' });
 
