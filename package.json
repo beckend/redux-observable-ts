@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/beckend/typescript-npm-boilerplate/issues"
   },
-  files: [
+  "files": [
     "build",
     "build-es2015"
   ],
@@ -26,6 +26,7 @@
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/ts-jest/preprocessor.js",
+    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
     "testRegex": "(/__tests__/.*|\\.(spec))\\.(ts|tsx)$",
     "collectCoverage": false,
     "coverageDirectory": "./coverage",
@@ -81,24 +82,24 @@
     "chai": "^3.5.0",
     "coveralls": "^2.11.14",
     "debug": "^2.2.0",
-    "fs-extra": "^0.30.0",
-    "globby": "^6.0.0",
+    "fs-extra": "^1.0.0",
+    "globby": "^6.1.0",
     "google-closure-compiler-js": "^20161024.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-debug": "^2.1.2",
     "gulp-run": "^1.7.1",
     "gulp-sourcemap": "^1.0.1",
-    "gulp-tslint": "^6.1.2",
-    "gulp-typescript": "^3.1.1",
+    "gulp-tslint": "^6.1.3",
+    "gulp-typescript": "^3.1.2",
     "merge2": "^1.0.2",
     "react": "^15.4.0-rc.4",
     "react-addons-test-utils": "^15.4.0-rc.4",
     "react-dom": "^15.4.0-rc.4",
     "react-test-renderer": "^15.4.0-rc.4",
     "redux": "^3.6.0",
-    "rxjs": "^5.0.0-rc.1",
+    "rxjs": "^5.0.0-rc.2",
     "sinon": "^1.17.6",
-    "ts-jest": "^0.1.8",
+    "ts-jest": "^0.1.13",
     "ts-node": "^1.6.1",
     "tslint": "^3.15.1",
     "tslint-microsoft-contrib": "^2.0.13",
