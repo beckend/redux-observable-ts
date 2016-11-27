@@ -31,7 +31,7 @@ describe('createEpicMiddleware', () => {
     const reducer: Reducer<any> = (state: TActionArr = [], action: TGenericAction) => state.concat(action);
     const epic = sinon.stub().returns(empty());
     const epicMiddleware = createEpicMiddleware(epic);
-    const mockMiddleware: middlewareFn<any> = <S>(store: MiddlewareAPI<S>) => (next: Dispatch<S>) => (action: any) => {
+    const mockMiddleware: middlewareFn<any> = <S>(store: MiddlewareAPI<S>) => () => () => {
       // tslint:disable-next-line
       expect(epic.calledOnce).to.be.true;
       expect(epic.firstCall.args[0]).to.be.instanceOf(ActionsObservable);
@@ -44,7 +44,7 @@ describe('createEpicMiddleware', () => {
 
   it('should accept an epic that wires up action$ input to action$ out', () => {
     const reducer: Reducer<any> = (state: TActionArr = [], action: TGenericAction) => state.concat(action);
-    const epic: IEpic<TGenericAction, any> = (action$, store) =>
+    const epic: IEpic<TGenericAction, TGenericAction, any> = (action$) =>
       mergeStatic(
         action$.ofType('FIRE_1')
           .__invoke(mapTo, { type: 'ACTION_1' }),
@@ -70,7 +70,7 @@ describe('createEpicMiddleware', () => {
 
   it('should allow you to replace the root epic with middleware.replaceEpic(epic)', () => {
     const reducer: Reducer<any> = (state: TActionArr = [], action: TGenericAction) => state.concat(action);
-    const epic1: IEpic<TGenericAction, any> = (action$) =>
+    const epic1: IEpic<TGenericAction, TGenericAction, any> = (action$) =>
       mergeStatic(
         of({ type: 'EPIC_1' }),
         action$.ofType('FIRE_1')
@@ -82,7 +82,7 @@ describe('createEpicMiddleware', () => {
         action$.ofType(EPIC_END)
           .__invoke(mapTo, { type: 'CLEAN_UP_AISLE_3' })
       );
-    const epic2: IEpic<TGenericAction, any> = (action$) =>
+    const epic2: IEpic<TGenericAction, TGenericAction, any> = (action$) =>
       mergeStatic(
         of({ type: 'EPIC_2' }),
         action$.ofType('FIRE_3')
