@@ -12,7 +12,7 @@ import {
 
 type TGenericAction = Action<any>;
 type TActionArr = TGenericAction[];
-type TGenericEpic = IEpic<TGenericAction, any>;
+type TGenericEpic = IEpic<TGenericAction, TGenericAction, any>;
 
 describe('combineEpics', () => {
   it('should combine epics', () => {

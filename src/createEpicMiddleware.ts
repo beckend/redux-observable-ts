@@ -28,15 +28,15 @@ const defaultOptions = {
   adapter: defaultAdapter,
 };
 
-export function createEpicMiddleware<TAction extends Action<any>, TStoreState>(
-  epic: IEpic<TAction, TStoreState>, { adapter = defaultAdapter }: IDefaultOptions = defaultOptions
+export function createEpicMiddleware<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState>(
+  epic: IEpic<TActionInput, TActionOutput, TStoreState>, { adapter = defaultAdapter }: IDefaultOptions = defaultOptions
 ) {
   if (typeof epic !== 'function') {
     throw new TypeError('You must provide a root Epic to createEpicMiddleware');
   }
 
   const input$ = new Subject();
-  const action$: ActionsObservable<TAction> = adapter.input(
+  const action$: ActionsObservable<Action<any>> = adapter.input(
     new ActionsObservable(input$)
   );
   const epic$ = new Subject();
@@ -45,16 +45,16 @@ export function createEpicMiddleware<TAction extends Action<any>, TStoreState>(
   const epicMiddleware = (_store: Store<any>) => {
     store = _store;
 
-    return (next: Dispatch<TAction>) => {
+    return (next: Dispatch<Action<any>>) => {
       epic$
-        .__invoke(map, (epicArg: IEpic<any, any>) => epicArg(action$, store))
-        .__invoke(switchMap, (actionArg$: ActionsObservable<TAction>) => adapter.output(actionArg$))
+        .__invoke(map, (epicArg: IEpic<Action<any>, Action<any>, TStoreState>) => epicArg(action$, store))
+        .__invoke(switchMap, (actionArg$: ActionsObservable<Action<any>>) => adapter.output(actionArg$))
         .subscribe(store.dispatch);
 
       // Setup initial root epic
       epic$.next(epic);
 
-      return (action: TAction) => {
+      return (action: Action<any>) => {
         const result = next(action);
         input$.next(action);
         return result;
@@ -62,7 +62,7 @@ export function createEpicMiddleware<TAction extends Action<any>, TStoreState>(
     };
   };
 
-  (epicMiddleware as any).replaceEpic = (nextEpic: IEpic<TAction, TStoreState>) => {
+  (epicMiddleware as any).replaceEpic = (nextEpic: IEpic<TActionInput, TActionOutput, TStoreState>) => {
     // gives the previous root Epic a last chance
     // to do some clean up
     store.dispatch({ type: EPIC_END });
@@ -71,5 +71,5 @@ export function createEpicMiddleware<TAction extends Action<any>, TStoreState>(
     epic$.next(nextEpic);
   };
 
-  return epicMiddleware as IEpicMiddleware<TAction, TStoreState>;
+  return epicMiddleware as IEpicMiddleware<TActionInput, TActionOutput, TStoreState>;
 }
