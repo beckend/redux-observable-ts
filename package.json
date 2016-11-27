@@ -25,7 +25,9 @@
     "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/ts-jest/preprocessor.js",
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
     "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
     "testRegex": "(/__tests__/.*|\\.(spec))\\.(ts|tsx)$",
     "collectCoverage": false,
@@ -51,7 +53,7 @@
       "json"
     ],
     "globals": {
-      "__TS_CONFIG__": "./src/tsconfig.test.json"
+      "__TS_CONFIG__": "./src/tsconfig-test.json"
     }
   },
   "keywords": [
@@ -63,52 +65,53 @@
   "author": "Linken Dinh",
   "license": "ISC",
   "devDependencies": {
-    "@types/bluebird": "^3.0.35",
+    "@types/bluebird": "^3.0.36",
     "@types/chai": "^3.4.34",
     "@types/debug": "0.0.29",
-    "@types/fs-extra": "0.0.34",
+    "@types/fs-extra": "0.0.35",
     "@types/gulp": "^3.8.32",
     "@types/gulp-debug": "^2.0.29",
     "@types/gulp-filter": "^3.0.29",
     "@types/gulp-typescript": "0.0.32",
-    "@types/jest": "^15.1.32",
-    "@types/merge2": "^0.3.29",
-    "@types/react": "^0.14.39",
-    "@types/react-dom": "^0.14.18",
+    "@types/jest": "^16.0.0",
+    "@types/react": "^0.14.50",
+    "@types/react-dom": "^0.14.19",
     "@types/redux": "^3.6.31",
-    "@types/redux-actions": "^0.8.31",
-    "@types/sinon": "^1.16.31",
+    "@types/redux-actions": "^0.8.33",
+    "@types/sinon": "^1.16.32",
     "bluebird": "^3.4.6",
     "chai": "^3.5.0",
-    "coveralls": "^2.11.14",
-    "debug": "^2.2.0",
+    "cmd-spawn": "^1.4.0",
+    "coveralls": "^2.11.15",
+    "debug": "^2.3.3",
     "fs-extra": "^1.0.0",
     "globby": "^6.1.0",
     "google-closure-compiler-js": "^20161024.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-debug": "^2.1.2",
+    "gulp-debug": "^3.0.0",
     "gulp-run": "^1.7.1",
     "gulp-sourcemap": "^1.0.1",
     "gulp-tslint": "^6.1.3",
-    "gulp-typescript": "^3.1.2",
-    "merge2": "^1.0.2",
-    "react": "^15.4.0-rc.4",
-    "react-addons-test-utils": "^15.4.0-rc.4",
-    "react-dom": "^15.4.0-rc.4",
-    "react-test-renderer": "^15.4.0-rc.4",
+    "gulp-typescript": "^3.1.3",
+    "jest": "^17.0.3",
+    "react": "^15.4.1",
+    "react-addons-test-utils": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-test-renderer": "^15.4.1",
     "redux": "^3.6.0",
     "rxjs": "^5.0.0-rc.2",
     "sinon": "^1.17.6",
-    "ts-jest": "^0.1.13",
-    "ts-node": "^1.6.1",
+    "ts-jest": "^17.0.0",
+    "ts-node": "^1.7.0",
     "tslint": "^3.15.1",
     "tslint-microsoft-contrib": "^2.0.13",
     "tslint-react": "^1.1.0",
-    "typescript": "^2.0.3"
+    "tslint-stylish": "^2.1.0-beta",
+    "typescript": "^2.2.0-dev.20161127"
   },
   "peerDependencies": {
     "redux": "3.*",
-    "rxjs": "^5.0.0-rc1"
+    "rxjs": "^5.0.0-rc4"
   },
   "engines": {
     "node": ">=6.0.0"
