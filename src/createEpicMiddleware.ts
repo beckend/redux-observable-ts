@@ -22,7 +22,7 @@ const defaultAdapter: IEpicAdapter = {
 };
 
 export interface IDefaultOptions {
-  adapter: IEpicAdapter;
+  readonly adapter: IEpicAdapter;
 }
 const defaultOptions = {
   adapter: defaultAdapter,

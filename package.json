@@ -1,5 +1,5 @@
 {
-  "name": "typescript-npm-boilerplate",
+  "name": "redux-observable",
   "version": "0.1.0",
   "description": "Base boilerplate to create npm modules using typescript",
   "homepage": "https://github.com/beckend/typescript-npm-boilerplate#readme",
