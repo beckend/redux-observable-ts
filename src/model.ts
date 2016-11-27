@@ -25,5 +25,5 @@ export interface IEpicAdapter {
  * epic middleware returned from createEpicMiddleware
  */
 export interface IEpicMiddleware<TAction extends Action<any>, TStoreState> extends Middleware {
-  replaceEpic: (nextEpic: IEpic<TAction, TStoreState>) => void;
+  readonly replaceEpic: (nextEpic: IEpic<TAction, TStoreState>) => void;
 }
