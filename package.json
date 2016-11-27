@@ -11,10 +11,11 @@
     "url": "https://github.com/beckend/typescript-npm-boilerplate/issues"
   },
   "files": [
-    "build",
-    "build-es2015"
+    "build-es5",
+    "build-es2015",
+    "build-es2017"
   ],
-  "main": "./build/index.js",
+  "main": "./build-es5/index.js",
   "jsnext:main": "./build-es2015/index.js",
   "typings": "./build/index.d.ts",
   "scripts": {
