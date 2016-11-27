@@ -6,8 +6,8 @@ import { Action } from 'redux-actions';
 /**
  * epic
  */
-export interface IEpic<TAction extends Action<any>, TStoreState> {
-    (action$: ActionsObservable<TAction>, store: Store<TStoreState>): Observable<TAction>;
+export interface IEpic<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState> {
+    (action$: ActionsObservable<TActionInput>, store: Store<TStoreState>): Observable<TActionOutput>;
 }
 /**
  * createEpicMiddleware adapter
@@ -19,6 +19,6 @@ export interface IEpicAdapter {
 /**
  * epic middleware returned from createEpicMiddleware
  */
-export interface IEpicMiddleware<TAction extends Action<any>, TStoreState> extends Middleware {
-    replaceEpic: (nextEpic: IEpic<TAction, TStoreState>) => void;
+export interface IEpicMiddleware<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState> extends Middleware {
+    readonly replaceEpic: (nextEpic: IEpic<TActionInput, TActionOutput, TStoreState>) => void;
 }
