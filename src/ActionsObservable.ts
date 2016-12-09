@@ -4,8 +4,10 @@
 /* tslint:disable: prefer-array-literal */
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { of } from 'rxjs/observable/of';
 import { Operator } from 'rxjs/Operator';
+import { Scheduler } from 'rxjs/Scheduler';
+import { of } from 'rxjs/observable/of';
+import { from } from 'rxjs/observable/from';
 import { filter } from 'rxjs/operator/filter';
 import { Action } from 'redux-actions';
 
@@ -19,6 +21,10 @@ export class ActionsObservable<T extends TAction> extends Observable<T> {
 
   public static of(...actions: Array<TAction | any>) {
     return new this((of(...actions) as any));
+  }
+
+  public static from(actions: Array<TAction | any>, scheduler?: Scheduler) {
+    return new this(from(actions, scheduler));
   }
 
   constructor(actionsSubject: Observable<T>) {

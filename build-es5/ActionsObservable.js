@@ -10,6 +10,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 /* tslint:disable: prefer-array-literal */
 var Observable_1 = require("rxjs/Observable");
 var of_1 = require("rxjs/observable/of");
+var from_1 = require("rxjs/observable/from");
 var filter_1 = require("rxjs/operator/filter");
 var ActionsObservable = (function (_super) {
     __extends(ActionsObservable, _super);
@@ -25,6 +26,9 @@ var ActionsObservable = (function (_super) {
             actions[_i] = arguments[_i];
         }
         return new this(of_1.of.apply(void 0, actions));
+    };
+    ActionsObservable.from = function (actions, scheduler) {
+        return new this(from_1.from(actions, scheduler));
     };
     ActionsObservable.prototype.lift = function (operator) {
         var observable = new ActionsObservable(this);

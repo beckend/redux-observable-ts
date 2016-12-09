@@ -5,6 +5,7 @@
 /* tslint:disable: prefer-array-literal */
 const Observable_1 = require("rxjs/Observable");
 const of_1 = require("rxjs/observable/of");
+const from_1 = require("rxjs/observable/from");
 const filter_1 = require("rxjs/operator/filter");
 class ActionsObservable extends Observable_1.Observable {
     constructor(actionsSubject) {
@@ -14,6 +15,9 @@ class ActionsObservable extends Observable_1.Observable {
     }
     static of(...actions) {
         return new this(of_1.of(...actions));
+    }
+    static from(actions, scheduler) {
+        return new this(from_1.from(actions, scheduler));
     }
     lift(operator) {
         const observable = new ActionsObservable(this);

@@ -48,9 +48,9 @@
     "@types/orchestrator" "*"
     "@types/vinyl" "*"
 
-"@types/jest@^16.0.0":
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-16.0.0.tgz#5fe49adee6db194357a52438c0d80695b59a45e9"
+"@types/jest@^16.0.1":
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-16.0.1.tgz#c7820ab2bedefe121d0e5ffaa8d0b22f44793f24"
 
 "@types/minimatch@*":
   version "2.0.29"
@@ -76,13 +76,13 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^0.14.50":
-  version "0.14.50"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-0.14.50.tgz#3f3f69db5661c8be3df99bde688e11300ef8131e"
+"@types/react@*", "@types/react@^0.14.54":
+  version "0.14.54"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-0.14.54.tgz#0fb0dadad895febeb468a885d0fa2284d5bbefae"
 
-"@types/redux-actions@^0.8.33":
-  version "0.8.33"
-  resolved "https://registry.yarnpkg.com/@types/redux-actions/-/redux-actions-0.8.33.tgz#a59ff61d0fccc3aff536ebe7b5121809654bd896"
+"@types/redux-actions@^0.8.34":
+  version "0.8.34"
+  resolved "https://registry.yarnpkg.com/@types/redux-actions/-/redux-actions-0.8.34.tgz#ed99b9aadececdae0e0f5c4fb8a5baef3fb522ed"
 
 "@types/redux@^3.6.31":
   version "3.6.31"
@@ -124,13 +124,9 @@ align-text@^0.1.1, align-text@^0.1.3:
     longest "^1.0.1"
     repeat-string "^1.5.2"
 
-amdefine@1.0.0:
+amdefine@1.0.0, amdefine@>=0.0.4:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.0.tgz#fd17474700cb5cc9c2b709f0be9d23ce3c198c33"
-
-amdefine@>=0.0.4:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
 ansi-escapes@^1.4.0:
   version "1.4.0"
@@ -1276,9 +1272,9 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
-google-closure-compiler-js@^20161024.0.0:
-  version "20161024.0.0"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-js/-/google-closure-compiler-js-20161024.0.0.tgz#ed8808dbf1fdcb306435e8afb4ae887c01883e86"
+google-closure-compiler-js@20161201.0.0:
+  version "20161201.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-js/-/google-closure-compiler-js-20161201.0.0.tgz#777d789fb8aa170d9b0269a41206d9810845556d"
   dependencies:
     gulp-util "^3.0.7"
     webpack-core "^0.6.8"
@@ -3105,9 +3101,9 @@ rimraf@2, rimraf@^2.4.3, rimraf@^2.4.4, rimraf@~2.5.1, rimraf@~2.5.4:
   dependencies:
     glob "^7.0.5"
 
-rxjs@^5.0.0-rc.2:
-  version "5.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.0.0-rc.4.tgz#a4d08bc5d7f30d48ed7130e2995490c326a325c4"
+rxjs@^5.0.0-rc.5:
+  version "5.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.0.0-rc.5.tgz#8cbd17fc242a54c07ef9116da23b0ec8e7d5cea9"
   dependencies:
     symbol-observable "^1.0.1"
 
@@ -3450,9 +3446,9 @@ trim-newlines@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/trim-newlines/-/trim-newlines-1.0.0.tgz#5887966bb582a4503a41eb524f7d35011815a613"
 
-ts-jest@^17.0.0:
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-17.0.0.tgz#745029f35c5cdebbacfbdc8e807740a149d2caab"
+ts-jest@^17.0.3:
+  version "17.0.3"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-17.0.3.tgz#63915b6446e41366b9ca8c1ec88772c586c62230"
   dependencies:
     glob-all "^3.1.0"
     istanbul-lib-instrument "^1.2.0"
@@ -3488,9 +3484,9 @@ tsconfig@^5.0.2:
     strip-bom "^2.0.0"
     strip-json-comments "^2.0.0"
 
-tslint-microsoft-contrib@^2.0.13:
-  version "2.0.13"
-  resolved "https://registry.yarnpkg.com/tslint-microsoft-contrib/-/tslint-microsoft-contrib-2.0.13.tgz#30ed7e1a03261eea091354eaca3afe7b25e04ca7"
+tslint-microsoft-contrib@^2.0.14:
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/tslint-microsoft-contrib/-/tslint-microsoft-contrib-2.0.14.tgz#a6c1acafedd4b2707d0a8719472d1ba8c0a7eb78"
 
 tslint-react@^1.1.0:
   version "1.1.0"
@@ -3539,9 +3535,9 @@ type-detect@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-1.0.0.tgz#762217cc06db258ec48908a1298e8b95121e8ea2"
 
-typescript@^2.2.0-dev.20161127:
-  version "2.2.0-dev.20161127"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.0-dev.20161127.tgz#3da590d1a0f15da9c39d2ebeab2006fb6b4d8949"
+typescript@next:
+  version "2.2.0-dev.20161209"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.0-dev.20161209.tgz#fbaa0dd50ca145f2eb659c9d0fab3ac833761315"
 
 ua-parser-js@^0.7.9:
   version "0.7.12"
