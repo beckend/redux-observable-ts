@@ -1,9 +1,5 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var tslib_1 = require("tslib");
 /* tslint:disable: no-increment-decrement */
 /* tslint:disable: no-reserved-keywords */
 /* tslint:disable: function-name */
@@ -13,7 +9,7 @@ var of_1 = require("rxjs/observable/of");
 var from_1 = require("rxjs/observable/from");
 var filter_1 = require("rxjs/operator/filter");
 var ActionsObservable = (function (_super) {
-    __extends(ActionsObservable, _super);
+    tslib_1.__extends(ActionsObservable, _super);
     function ActionsObservable(actionsSubject) {
         var _this = _super.call(this) || this;
         _this.observers = [];

@@ -3484,6 +3484,10 @@ tsconfig@^5.0.2:
     strip-bom "^2.0.0"
     strip-json-comments "^2.0.0"
 
+tslib@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.5.0.tgz#3bb50f871e5fdf9a4555a9ff237b730860048fea"
+
 tslint-microsoft-contrib@^2.0.14:
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/tslint-microsoft-contrib/-/tslint-microsoft-contrib-2.0.14.tgz#a6c1acafedd4b2707d0a8719472d1ba8c0a7eb78"
@@ -3535,9 +3539,9 @@ type-detect@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-1.0.0.tgz#762217cc06db258ec48908a1298e8b95121e8ea2"
 
-typescript@next:
-  version "2.2.0-dev.20161209"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.0-dev.20161209.tgz#fbaa0dd50ca145f2eb659c9d0fab3ac833761315"
+typescript@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.1.5.tgz#6fe9479e00e01855247cea216e7561bafcdbcd4a"
 
 ua-parser-js@^0.7.9:
   version "0.7.12"
