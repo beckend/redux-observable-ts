@@ -1,19 +1,20 @@
 /* tslint:disable: no-reserved-keywords */
 /* tslint:disable: no-console */
 /* tslint:disable: max-line-length */
+/* tslint:disable: object-literal-sort-keys */
 import { expect } from 'chai';
-import { createStore, applyMiddleware } from 'redux';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+import { applyMiddleware, createStore } from 'redux';
 import { Store } from 'redux';
 import { Action } from 'redux-actions';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mapTo';
+import 'rxjs/add/operator/mergeMap';
+import { Observable } from 'rxjs/Observable';
 import {
-  createEpicMiddleware,
-  combineEpics,
   ActionsObservable,
+  combineEpics,
+  createEpicMiddleware,
   IEpic,
   IEpicMiddleware,
 } from '../index';
@@ -53,16 +54,16 @@ const epic5: IEpic<TGenericAction, TGenericAction, any> = (action$) =>
   action$
     .ofType('FIFTH')
     .mergeMap(({ type, payload }) => Observable.of({
-      type,
       payload,
+      type,
     }));
 
 const epic6 = (action$: any) =>
   action$
     .ofType('SIXTH')
     .map(({ payload }: any) => ({
-      type: 'sixth',
       payload,
+      type: 'sixth',
     }));
 
 const rootEpic1: IEpic<TGenericAction, TGenericAction, any> = combineEpics<TGenericAction, TGenericAction, TStoreState>(epic1, epic2, epic3, epic4, epic5, epic6);
@@ -81,7 +82,7 @@ Boolean(action$);
 const reducer = (state: TGenericAction[] = [], action: TGenericAction) => state.concat(action);
 const store = createStore(
   reducer,
-  applyMiddleware(epicMiddleware1, epicMiddleware2)
+  applyMiddleware(epicMiddleware1, epicMiddleware2),
 );
 
 epicMiddleware1.replaceEpic(rootEpic2);

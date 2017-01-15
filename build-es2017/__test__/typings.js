@@ -2,13 +2,14 @@
 /* tslint:disable: no-reserved-keywords */
 /* tslint:disable: no-console */
 /* tslint:disable: max-line-length */
+/* tslint:disable: object-literal-sort-keys */
 const chai_1 = require("chai");
 const redux_1 = require("redux");
-const Observable_1 = require("rxjs/Observable");
 require("rxjs/add/observable/of");
-require("rxjs/add/operator/mapTo");
 require("rxjs/add/operator/map");
+require("rxjs/add/operator/mapTo");
 require("rxjs/add/operator/mergeMap");
+const Observable_1 = require("rxjs/Observable");
 const index_1 = require("../index");
 const epic1 = (action$, store) => action$
     .ofType('FIRST')
@@ -32,14 +33,14 @@ const epic4 = () => Observable_1.Observable
 const epic5 = (action$) => action$
     .ofType('FIFTH')
     .mergeMap(({ type, payload }) => Observable_1.Observable.of({
-    type,
     payload,
+    type,
 }));
 const epic6 = (action$) => action$
     .ofType('SIXTH')
     .map(({ payload }) => ({
-    type: 'sixth',
     payload,
+    type: 'sixth',
 }));
 const rootEpic1 = index_1.combineEpics(epic1, epic2, epic3, epic4, epic5, epic6);
 const rootEpic2 = index_1.combineEpics(epic1, epic2, epic3, epic4, epic5, epic6);

@@ -1,14 +1,14 @@
 import { expect } from 'chai';
-import * as sinon from 'sinon';
-import { combineEpics, ActionsObservable } from '../';
-import { Subject } from 'rxjs/Subject';
 import { Action } from 'redux-actions';
-import '../rxjs/add/__invoke';
 import { map } from 'rxjs/operator/map';
 import { toArray } from 'rxjs/operator/toArray';
+import { Subject } from 'rxjs/Subject';
+import * as sinon from 'sinon';
+import { ActionsObservable, combineEpics } from '../';
 import {
   IEpic,
 } from '../model';
+import '../rxjs/add/__invoke';
 
 type TGenericAction = Action<any>;
 type TActionArr = TGenericAction[];
@@ -25,7 +25,7 @@ describe('combineEpics', () => {
 
     const epic = combineEpics(
       epic1,
-      epic2
+      epic2,
     );
 
     const store = { I: 'am', a: 'store' };
@@ -51,7 +51,7 @@ describe('combineEpics', () => {
 
     const rootEpic = combineEpics(
       epic1,
-      epic2
+      epic2,
     );
 
     rootEpic(1, 2, 3, 4)

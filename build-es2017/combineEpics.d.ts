@@ -1,7 +1,6 @@
-/// <reference types="redux-actions" />
+import { Action } from 'redux-actions';
 import { Observable } from 'rxjs/Observable';
 import { IEpic } from './model';
-import { Action } from 'redux-actions';
 /**
  * Merges all epics into a single one.
  */

@@ -1,20 +1,20 @@
 /* tslint:disable: variable-name */
-import { Action } from 'redux-actions';
 import {
-  Store,
   Dispatch,
+  Store,
 } from 'redux';
+import { Action } from 'redux-actions';
+import { map } from 'rxjs/operator/map';
+import { switchMap } from 'rxjs/operator/switchMap';
+import { Subject } from 'rxjs/Subject';
 import { ActionsObservable } from './ActionsObservable';
 import { EPIC_END } from './EPIC_END';
 import {
-  IEpicAdapter,
   IEpic,
+  IEpicAdapter,
   IEpicMiddleware,
 } from './model';
-import { Subject } from 'rxjs/Subject';
 import './rxjs/add/__invoke';
-import { map } from 'rxjs/operator/map';
-import { switchMap } from 'rxjs/operator/switchMap';
 
 const defaultAdapter: IEpicAdapter = {
   input: (action$: any) => action$,
@@ -29,7 +29,7 @@ const defaultOptions = {
 };
 
 export function createEpicMiddleware<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState>(
-  epic: IEpic<TActionInput, TActionOutput, TStoreState>, { adapter = defaultAdapter }: IDefaultOptions = defaultOptions
+  epic: IEpic<TActionInput, TActionOutput, TStoreState>, { adapter = defaultAdapter }: IDefaultOptions = defaultOptions,
 ) {
   if (typeof epic !== 'function') {
     throw new TypeError('You must provide a root Epic to createEpicMiddleware');
@@ -37,7 +37,7 @@ export function createEpicMiddleware<TActionInput extends Action<any>, TActionOu
 
   const input$ = new Subject();
   const action$: ActionsObservable<Action<any>> = adapter.input(
-    new ActionsObservable(input$)
+    new ActionsObservable(input$),
   );
   const epic$ = new Subject();
 

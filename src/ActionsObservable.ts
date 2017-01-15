@@ -2,22 +2,18 @@
 /* tslint:disable: no-reserved-keywords */
 /* tslint:disable: function-name */
 /* tslint:disable: prefer-array-literal */
+import { Action } from 'redux-actions';
 import { Observable } from 'rxjs/Observable';
+import { from } from 'rxjs/observable/from';
+import { of } from 'rxjs/observable/of';
 import { Observer } from 'rxjs/Observer';
 import { Operator } from 'rxjs/Operator';
-import { Scheduler } from 'rxjs/Scheduler';
-import { of } from 'rxjs/observable/of';
-import { from } from 'rxjs/observable/from';
 import { filter } from 'rxjs/operator/filter';
-import { Action } from 'redux-actions';
+import { Scheduler } from 'rxjs/Scheduler';
 
 export type TAction = Action<any>;
 
 export class ActionsObservable<T extends TAction> extends Observable<T> {
-
-  public observers: Observer<T>[] | null = [];
-
-  public source: Observable<T>;
 
   public static of(...actions: Array<TAction | any>) {
     return new this((of(...actions) as any));
@@ -26,6 +22,10 @@ export class ActionsObservable<T extends TAction> extends Observable<T> {
   public static from(actions: Array<TAction | any>, scheduler?: Scheduler) {
     return new this(from(actions, scheduler));
   }
+
+  public observers: Array<Observer<T>> | null = [];
+
+  public source: Observable<T>;
 
   constructor(actionsSubject: Observable<T>) {
     super();
@@ -53,4 +53,5 @@ export class ActionsObservable<T extends TAction> extends Observable<T> {
       return false;
     });
   }
+
 }

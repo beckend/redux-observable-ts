@@ -1,11 +1,7 @@
 "use strict";
-/* tslint:disable: no-increment-decrement */
-/* tslint:disable: no-reserved-keywords */
-/* tslint:disable: function-name */
-/* tslint:disable: prefer-array-literal */
 const Observable_1 = require("rxjs/Observable");
-const of_1 = require("rxjs/observable/of");
 const from_1 = require("rxjs/observable/from");
+const of_1 = require("rxjs/observable/of");
 const filter_1 = require("rxjs/operator/filter");
 class ActionsObservable extends Observable_1.Observable {
     constructor(actionsSubject) {

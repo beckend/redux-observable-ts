@@ -1,7 +1,7 @@
-import { ActionsObservable }  from '../ActionsObservable';
 import { expect } from 'chai';
-import { Subject } from 'rxjs/Subject';
 import { Action } from 'redux-actions';
+import { Subject } from 'rxjs/Subject';
+import { ActionsObservable }  from '../ActionsObservable';
 
 type TGenericAction = Action<any>;
 type TActionArr = TGenericAction[];
@@ -47,7 +47,7 @@ describe('ActionsObservable', () => {
     });
 
     it('should support ActionsObservable.from(...actions, scheduler)', () => {
-      const output: Action<any>[] = [];
+      const output: Array<Action<any>> = [];
       const action$ = ActionsObservable.from([{ type: 'FIRST' }, { type: 'SECOND' }]);
       action$.subscribe((x) => output.push(x));
 

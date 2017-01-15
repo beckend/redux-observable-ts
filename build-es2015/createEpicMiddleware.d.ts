@@ -1,6 +1,5 @@
-/// <reference types="redux-actions" />
 import { Action } from 'redux-actions';
-import { IEpicAdapter, IEpic, IEpicMiddleware } from './model';
+import { IEpic, IEpicAdapter, IEpicMiddleware } from './model';
 import './rxjs/add/__invoke';
 export interface IDefaultOptions {
     readonly adapter: IEpicAdapter;

@@ -1,8 +1,7 @@
-/// <reference types="redux-actions" />
 import { Middleware, Store } from 'redux';
+import { Action } from 'redux-actions';
 import { Observable } from 'rxjs/Observable';
 import { ActionsObservable } from './ActionsObservable';
-import { Action } from 'redux-actions';
 /**
  * epic
  */
