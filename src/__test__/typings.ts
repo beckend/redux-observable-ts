@@ -1,71 +1,72 @@
 /* tslint:disable: no-reserved-keywords */
 /* tslint:disable: no-console */
 /* tslint:disable: max-line-length */
+/* tslint:disable: no-unused-expression */
 import { expect } from 'chai';
-import { createStore, applyMiddleware } from 'redux';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+import { applyMiddleware, createStore } from 'redux';
 import { Store } from 'redux';
 import { Action } from 'redux-actions';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mapTo';
+import 'rxjs/add/operator/mergeMap';
+import { Observable } from 'rxjs/Observable';
 import {
-  createEpicMiddleware,
-  combineEpics,
   ActionsObservable,
-  IEpic,
+  combineEpics,
+  createEpicMiddleware,
   IEpicMiddleware,
+  TEpic,
 } from '../index';
 
 // Flux standard action
 type TGenericAction = Action<any>;
 type TStoreState = any;
 
-const epic1: IEpic<TGenericAction, TGenericAction, any> = (action$: ActionsObservable<TGenericAction>, store: Store<any>) =>
+const epic1: TEpic<TGenericAction, TGenericAction, any> = (action$: ActionsObservable<TGenericAction>, store: Store<any>) =>
   action$
     .ofType('FIRST')
     .mapTo({
-      type: 'first',
       payload: store.getState(),
+      type: 'first',
     });
 
-const epic2: IEpic<TGenericAction, TGenericAction, any> = (action$) =>
+const epic2: TEpic<TGenericAction, TGenericAction, any> = (action$) =>
   action$
     .ofType('SECOND', 'NEVER')
     .mapTo('second')
     .mergeMap((type) => Observable.of({ type }));
 
-const epic3: IEpic<TGenericAction, TGenericAction, any> = (action$) =>
+const epic3: TEpic<TGenericAction, TGenericAction, any> = (action$) =>
   action$
     .ofType('THIRD')
     .mapTo({
       type: 'third',
     });
 
-const epic4: IEpic<TGenericAction, TGenericAction, any> = () =>
+const epic4: TEpic<TGenericAction, TGenericAction, any> = () =>
   Observable
     .of({
       type: 'fourth',
     });
 
-const epic5: IEpic<TGenericAction, TGenericAction, any> = (action$) =>
+const epic5: TEpic<TGenericAction, TGenericAction, any> = (action$) =>
   action$
     .ofType('FIFTH')
     .mergeMap(({ type, payload }) => Observable.of({
-      type,
       payload,
+      type,
     }));
 
 const epic6 = (action$: any) =>
   action$
     .ofType('SIXTH')
     .map(({ payload }: any) => ({
-      type: 'sixth',
       payload,
+      type: 'sixth',
     }));
 
-const rootEpic1: IEpic<TGenericAction, TGenericAction, any> = combineEpics<TGenericAction, TGenericAction, TStoreState>(epic1, epic2, epic3, epic4, epic5, epic6);
+const rootEpic1: TEpic<TGenericAction, TGenericAction, any> = combineEpics<TGenericAction, TGenericAction, TStoreState>(epic1, epic2, epic3, epic4, epic5, epic6);
 const rootEpic2 = combineEpics(epic1, epic2, epic3, epic4, epic5, epic6);
 
 const epicMiddleware1: IEpicMiddleware<TGenericAction, TGenericAction, TStoreState> = createEpicMiddleware<TGenericAction, TGenericAction, TStoreState>(rootEpic1);
@@ -81,7 +82,7 @@ Boolean(action$);
 const reducer = (state: TGenericAction[] = [], action: TGenericAction) => state.concat(action);
 const store = createStore(
   reducer,
-  applyMiddleware(epicMiddleware1, epicMiddleware2)
+  applyMiddleware(epicMiddleware1, epicMiddleware2),
 );
 
 epicMiddleware1.replaceEpic(rootEpic2);
@@ -107,7 +108,6 @@ describe('Typings test', () => {
       { type: 'fourth' },
       { type: 'FIRST' },
       {
-        type: 'first',
         payload: [
           { type: '@@redux/INIT' },
           { type: 'fourth' },
@@ -116,15 +116,16 @@ describe('Typings test', () => {
           { type: 'fourth' },
           { type: '@@redux-observable/EPIC_END' },
         ],
+        type: 'first',
       },
       {
-        type: 'first',
         payload: [
           { type: '@@redux/INIT' },
           { type: 'fourth' },
           { type: 'fourth' },
           { type: '@@redux-observable/EPIC_END' },
         ],
+        type: 'first',
       },
       { type: 'SECOND' },
       { type: 'second' },

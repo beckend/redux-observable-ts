@@ -1,16 +1,15 @@
 import * as gulp from 'gulp';
+import * as gDebug from 'gulp-debug';
+import gTslint from 'gulp-tslint';
+import { SrcOptions } from 'vinyl-fs';
 import {
   PATH_TSLINT_DEFAULT,
 } from '../../../config';
-import gTslint from 'gulp-tslint';
-import * as gDebug from 'gulp-debug';
-
-const tslintStylish = require('tslint-stylish');
 
 interface IGetLinterTslintStreamArgs {
   // used in gulp.src
   readonly src: string | string[];
-  readonly srcOpts?: gulp.SrcOptions;
+  readonly srcOpts?: SrcOptions;
   // see https://github.com/panuhorsmalahti/gulp-tslint typings are not up to date
   readonly tslintOpts?: any;
   // outdated typings
@@ -23,13 +22,12 @@ export const getLinterTslintStream = ({ src, srcOpts }: IGetLinterTslintStreamAr
     .pipe(gTslint({
       // program,
       configuration: PATH_TSLINT_DEFAULT,
-      formatter: 'verbose',
+      formatter: 'stylish',
     }))
-    .pipe((gTslint as any).report(
-      tslintStylish,
-      {
-        emitError: true,
-        summarizeFailureOutput: true,
-      }
+    .pipe(gTslint.report({
+      emitError: true,
+      reportLimit: 0,
+      summarizeFailureOutput: true,
+    },
     ));
 };

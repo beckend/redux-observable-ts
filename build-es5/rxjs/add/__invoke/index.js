@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /* tslint:disable: interface-name */
 var Observable_1 = require("rxjs/Observable");
 var __invoke_1 = require("../../operator/__invoke");

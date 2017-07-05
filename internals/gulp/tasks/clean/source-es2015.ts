@@ -1,12 +1,12 @@
 /**
  * Cleanup
  */
-import * as gulp from 'gulp';
-import * as fs from 'fs-extra';
-import { PATH_BUILD_ES2015 } from '../../config';
 import * as debugMod from 'debug';
+import * as fs from 'fs-extra';
+import * as gulp from 'gulp';
+import { PATH_BUILD_ES2015 } from '../../config';
 
-gulp.task('clean:src-es2015', (done: Function) => {
+gulp.task('clean:src-es2015', (done) => {
   const debug = debugMod('task-clean-source');
   fs.remove(PATH_BUILD_ES2015, (er) => {
     if (!er) {

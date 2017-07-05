@@ -1,7 +1,7 @@
-import { ActionsObservable }  from '../ActionsObservable';
 import { expect } from 'chai';
-import { Subject } from 'rxjs/Subject';
 import { Action } from 'redux-actions';
+import { Subject } from 'rxjs/Subject';
+import { ActionsObservable } from '../ActionsObservable';
 
 type TGenericAction = Action<any>;
 type TActionArr = TGenericAction[];

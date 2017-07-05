@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var createEpicMiddleware_1 = require("./createEpicMiddleware");
 exports.createEpicMiddleware = createEpicMiddleware_1.createEpicMiddleware;
 var ActionsObservable_1 = require("./ActionsObservable");

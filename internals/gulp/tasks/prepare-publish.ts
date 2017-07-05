@@ -16,7 +16,7 @@ gulp.task('prepare:publish', (gV4.series(
 
     gV4.series(
       'build:all',
-      'minify:all'
-    )
-  )
+      'minify:all',
+    ),
+  ),
 )));

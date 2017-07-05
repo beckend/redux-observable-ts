@@ -1,8 +1,7 @@
-/// <reference types="redux-actions" />
 import { Action } from 'redux-actions';
-import { IEpicAdapter, IEpic, IEpicMiddleware } from './model';
+import { IEpicAdapter, IEpicMiddleware, TEpic } from './model';
 import './rxjs/add/__invoke';
 export interface IDefaultOptions {
-    adapter: IEpicAdapter;
+    readonly adapter: IEpicAdapter;
 }
-export declare function createEpicMiddleware<TAction extends Action<any>, TStoreState>(epic: IEpic<TAction, TStoreState>, {adapter}?: IDefaultOptions): IEpicMiddleware<TAction, TStoreState>;
+export declare function createEpicMiddleware<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState>(epic: TEpic<TActionInput, TActionOutput, TStoreState>, {adapter}?: IDefaultOptions): IEpicMiddleware<TActionInput, TActionOutput, TStoreState>;

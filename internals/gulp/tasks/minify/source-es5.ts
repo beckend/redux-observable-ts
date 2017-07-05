@@ -17,11 +17,11 @@ gulp.task('minify:src-es5', async () => {
   ]);
   if (filePaths.length > 0) {
     return writeAllFiles({
-      filePaths,
       compilerFlags: {
         languageIn: 'ECMASCRIPT5',
         languageOut: 'ECMASCRIPT5',
       },
+      filePaths,
     });
   }
 });

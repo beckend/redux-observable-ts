@@ -1,15 +1,15 @@
-/* tslint:disable: max-line-length */
-import { merge } from 'rxjs/observable/merge';
-import { Observable } from 'rxjs/Observable';
-import { IEpic } from './model';
 import { Action } from 'redux-actions';
+import { Observable } from 'rxjs/Observable';
+import { merge } from 'rxjs/observable/merge';
+import { TEpic } from './model';
 
 /**
  * Merges all epics into a single one.
  */
-export const combineEpics = <TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState>(...epics: IEpic<TActionInput, TActionOutput, TStoreState>[]) => {
+// tslint:disable-next-line: max-line-length
+export const combineEpics = <TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState>(...epics: Array<TEpic<TActionInput, TActionOutput, TStoreState>>) => {
   return (...epicArgs: any[]): Observable<TActionOutput> =>
-    merge<Action<any>, Action<any>>(
-      ...epics.map((epic: any) => epic(...epicArgs))
+    merge(
+      ...epics.map((epic: any) => epic(...epicArgs)),
     );
 };

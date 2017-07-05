@@ -4,25 +4,23 @@
  * testing uses an operator that it does not import!
  */
 import { expect } from 'chai';
-import '../rxjs/add/__invoke';
-import * as sinon from 'sinon';
-import { createStore, applyMiddleware } from 'redux';
-import { createEpicMiddleware, ActionsObservable, EPIC_END } from '../index';
-import { of } from 'rxjs/observable/of';
-import { empty } from 'rxjs/observable/empty';
-import { mergeStatic } from 'rxjs/operator/merge';
-import { mapTo } from 'rxjs/operator/mapTo';
-import { Action } from 'redux-actions';
 import {
   MiddlewareAPI,
-  Dispatch,
   Reducer,
 } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import { Action } from 'redux-actions';
+import { empty } from 'rxjs/observable/empty';
+import { of } from 'rxjs/observable/of';
+import { mapTo } from 'rxjs/operator/mapTo';
+import { mergeStatic } from 'rxjs/operator/merge';
+import * as sinon from 'sinon';
+import { ActionsObservable, createEpicMiddleware, EPIC_END } from '../index';
 import {
-  IEpic,
+  TEpic,
 } from '../model';
+import '../rxjs/add/__invoke';
 
-type middlewareFn<S> = <S>(api: MiddlewareAPI<S>) => (next: Dispatch<S>) => Dispatch<S>;
 type TGenericAction = Action<any>;
 type TActionArr = TGenericAction[];
 
@@ -31,7 +29,7 @@ describe('createEpicMiddleware', () => {
     const reducer: Reducer<any> = (state: TActionArr = [], action: TGenericAction) => state.concat(action);
     const epic = sinon.stub().returns(empty());
     const epicMiddleware = createEpicMiddleware(epic);
-    const mockMiddleware: middlewareFn<any> = <S>(store: MiddlewareAPI<S>) => () => () => {
+    const mockMiddleware: any = <S>(store: MiddlewareAPI<S>) => () => () => {
       // tslint:disable-next-line
       expect(epic.calledOnce).to.be.true;
       expect(epic.firstCall.args[0]).to.be.instanceOf(ActionsObservable);
@@ -44,7 +42,7 @@ describe('createEpicMiddleware', () => {
 
   it('should accept an epic that wires up action$ input to action$ out', () => {
     const reducer: Reducer<any> = (state: TActionArr = [], action: TGenericAction) => state.concat(action);
-    const epic: IEpic<TGenericAction, TGenericAction, any> = (action$) =>
+    const epic: TEpic<TGenericAction, TGenericAction, any> = (action$) =>
       mergeStatic(
         action$.ofType('FIRE_1')
           .__invoke(mapTo, { type: 'ACTION_1' }),
@@ -70,8 +68,8 @@ describe('createEpicMiddleware', () => {
 
   it('should allow you to replace the root epic with middleware.replaceEpic(epic)', () => {
     const reducer: Reducer<any> = (state: TActionArr = [], action: TGenericAction) => state.concat(action);
-    const epic1: IEpic<TGenericAction, TGenericAction, any> = (action$) =>
-      mergeStatic(
+    const epic1: TEpic<TGenericAction, TGenericAction, any> = (action$) =>
+      mergeStatic<any>(
         of({ type: 'EPIC_1' }),
         action$.ofType('FIRE_1')
           .__invoke(mapTo, { type: 'ACTION_1' }),
@@ -80,17 +78,17 @@ describe('createEpicMiddleware', () => {
         action$.ofType('FIRE_GENERIC')
           .__invoke(mapTo, { type: 'EPIC_1_GENERIC' }),
         action$.ofType(EPIC_END)
-          .__invoke(mapTo, { type: 'CLEAN_UP_AISLE_3' })
+          .__invoke(mapTo, { type: 'CLEAN_UP_AISLE_3' }),
       );
-    const epic2: IEpic<TGenericAction, TGenericAction, any> = (action$) =>
-      mergeStatic(
+    const epic2: TEpic<TGenericAction, TGenericAction, any> = (action$) =>
+      mergeStatic<any>(
         of({ type: 'EPIC_2' }),
         action$.ofType('FIRE_3')
           .__invoke(mapTo, { type: 'ACTION_3' }),
         action$.ofType('FIRE_4')
           .__invoke(mapTo, { type: 'ACTION_4' }),
         action$.ofType('FIRE_GENERIC')
-          .__invoke(mapTo, { type: 'EPIC_2_GENERIC' })
+          .__invoke(mapTo, { type: 'EPIC_2_GENERIC' }),
       );
 
     const middleware = createEpicMiddleware(epic1);

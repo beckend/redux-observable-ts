@@ -1,4 +1,4 @@
 /**
  * Temporary operator until something official comes along
  */
-export declare function __invoke(fn: Function, ...args: any[]): any;
+export declare function __invoke<TFN>(fn: TFN, ...args: any[]): any;

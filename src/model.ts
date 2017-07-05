@@ -1,14 +1,13 @@
 import { Middleware, Store } from 'redux';
+import { Action } from 'redux-actions';
 import { Observable } from 'rxjs/Observable';
 import { ActionsObservable } from './ActionsObservable';
-import { Action } from 'redux-actions';
 
 /**
  * epic
  */
-export interface IEpic<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState> {
-  (action$: ActionsObservable<TActionInput>, store: Store<TStoreState>): Observable<TActionOutput>;
-}
+export type TEpic<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState> =
+  (action$: ActionsObservable<TActionInput>, store: Store<TStoreState>) => Observable<TActionOutput>;
 
 /**
  * createEpicMiddleware adapter
@@ -21,6 +20,7 @@ export interface IEpicAdapter {
 /**
  * epic middleware returned from createEpicMiddleware
  */
+// tslint:disable-next-line: max-line-length
 export interface IEpicMiddleware<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState> extends Middleware {
-  readonly replaceEpic: (nextEpic: IEpic<TActionInput, TActionOutput, TStoreState>) => void;
+  readonly replaceEpic: (nextEpic: TEpic<TActionInput, TActionOutput, TStoreState>) => void;
 }

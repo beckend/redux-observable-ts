@@ -1,3 +1,4 @@
-import './source';
 import './internals';
+import './source';
+
 import './all';

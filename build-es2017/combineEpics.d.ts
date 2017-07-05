@@ -1,8 +1,7 @@
-/// <reference types="redux-actions" />
-import { Observable } from 'rxjs/Observable';
-import { IEpic } from './model';
 import { Action } from 'redux-actions';
+import { Observable } from 'rxjs/Observable';
+import { TEpic } from './model';
 /**
  * Merges all epics into a single one.
  */
-export declare function combineEpics<TAction extends Action<any>, TStoreState>(...epics: IEpic<TAction, TStoreState>[]): (...epicArgs: any[]) => Observable<TAction>;
+export declare const combineEpics: <TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState>(...epics: TEpic<TActionInput, TActionOutput, TStoreState>[]) => (...epicArgs: any[]) => Observable<TActionOutput>;

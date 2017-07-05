@@ -17,12 +17,12 @@ gulp.task('minify:src-es2015', async () => {
   ]);
   if (filePaths.length > 0) {
     return writeAllFiles({
-      filePaths,
       compilerFlags: {
         languageIn: 'ECMASCRIPT6',
         // ES6 out not yet supported
         languageOut: 'ECMASCRIPT5',
       },
+      filePaths,
     });
   }
 });

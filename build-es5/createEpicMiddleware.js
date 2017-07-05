@@ -1,10 +1,11 @@
 "use strict";
-var ActionsObservable_1 = require("./ActionsObservable");
-var EPIC_END_1 = require("./EPIC_END");
-var Subject_1 = require("rxjs/Subject");
-require("./rxjs/add/__invoke");
+Object.defineProperty(exports, "__esModule", { value: true });
 var map_1 = require("rxjs/operator/map");
 var switchMap_1 = require("rxjs/operator/switchMap");
+var Subject_1 = require("rxjs/Subject");
+var ActionsObservable_1 = require("./ActionsObservable");
+var EPIC_END_1 = require("./EPIC_END");
+require("./rxjs/add/__invoke");
 var defaultAdapter = {
     input: function (action$) { return action$; },
     output: function (action$) { return action$; },

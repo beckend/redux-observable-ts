@@ -1,35 +1,33 @@
-/* tslint:disable: no-increment-decrement */
-/* tslint:disable: no-reserved-keywords */
-/* tslint:disable: function-name */
-/* tslint:disable: prefer-array-literal */
+import { Action } from 'redux-actions';
 import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 import { of } from 'rxjs/observable/of';
+import { Observer } from 'rxjs/Observer';
 import { Operator } from 'rxjs/Operator';
 import { filter } from 'rxjs/operator/filter';
-import { Action } from 'redux-actions';
 
 export type TAction = Action<any>;
 
 export class ActionsObservable<T extends TAction> extends Observable<T> {
 
-  public observers: Observer<T>[] | null = [];
+  public static of(...actions: Array<TAction | any>) {
+    return new this(of(...actions));
+  }
+
+  public observers: Array<Observer<T>> | null = [];
 
   public source: Observable<T>;
-
-  public static of(...actions: Array<TAction | any>) {
-    return new this((of(...actions) as any));
-  }
 
   constructor(actionsSubject: Observable<T>) {
     super();
     this.source = actionsSubject;
-  }
 
-  public lift(operator: Operator<any, T>) {
-    const observable = new ActionsObservable((this as any));
-    observable.operator = operator;
-    return observable;
+    const lift = <RLift extends TAction>(operator: Operator<T, RLift>) => {
+      const observable = new ActionsObservable((this as any));
+      observable.operator = operator;
+      return observable;
+    };
+
+    this.lift = lift as any;
   }
 
   public ofType(...keys: string[]): Observable<T> {

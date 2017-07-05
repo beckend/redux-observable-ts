@@ -1,11 +1,9 @@
-/* tslint:disable: no-invalid-this */
+/* tslint:disable: ban-types */
 /* tslint:disable: function-name */
+/* tslint:disable: no-invalid-this */
 /**
  * Temporary operator until something official comes along
  */
-export function __invoke(fn: Function, ...args: any[]) {
-  if (args && args.length > 0) {
-    return fn.apply(this, args);
-  }
-  return fn.call(this);
+export function __invoke<TFN>(fn: TFN, ...args: any[]) {
+  return (fn as any).apply(this, args);
 }
