@@ -1,3 +1,4 @@
+/* tslint:disable: no-shadowed-variable */
 import { expect } from 'chai';
 import { Action } from 'redux-actions';
 import { map } from 'rxjs/operator/map';

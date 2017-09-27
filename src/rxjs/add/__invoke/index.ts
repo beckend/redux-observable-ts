@@ -1,4 +1,5 @@
 /* tslint:disable: interface-name */
+/* tslint:disable: no-shadowed-variable */
 import { Observable } from 'rxjs/Observable';
 import { __invoke } from '../../operator/__invoke';
 

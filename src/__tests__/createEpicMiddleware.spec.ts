@@ -1,3 +1,4 @@
+/* tslint:disable: no-shadowed-variable */
 /**
  * We need to import the operators separately and not add them to the Observable
  * prototype, otherwise we might accidentally cover-up that the source we're
