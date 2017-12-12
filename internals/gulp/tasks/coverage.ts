@@ -1,4 +1,3 @@
-/* tslint:disable: no-console */
 /**
  * Run jest and collect coverage
  */
@@ -16,6 +15,7 @@ gulp.task('coverage', async () => {
   debug(`running: ${cmd}`);
   const r = await cmdSpawn(cmd, { buffer: true });
   if (r) {
+    // tslint:disable-next-line: no-console
     console.log(r.stdout);
   }
   debug(`finish: ${cmd}`);

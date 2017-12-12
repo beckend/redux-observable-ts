@@ -21,6 +21,7 @@ function createEpicMiddleware(epic, { adapter = defaultAdapter } = defaultOption
     const action$ = adapter.input(new ActionsObservable_1.ActionsObservable(input$));
     const epic$ = new Subject_1.Subject();
     let store;
+    // tslint:disable-next-line: variable-name
     const epicMiddleware = (_store) => {
         store = _store;
         return (next) => {

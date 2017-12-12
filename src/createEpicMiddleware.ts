@@ -1,4 +1,3 @@
-/* tslint:disable: variable-name */
 import {
   Dispatch,
   Store,
@@ -29,7 +28,7 @@ const defaultOptions = {
 };
 
 export function createEpicMiddleware<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState>(
-  epic: TEpic<TActionInput, TActionOutput, TStoreState>, { adapter = defaultAdapter }: IDefaultOptions = defaultOptions,
+  epic: TEpic<TActionInput, TActionOutput, TStoreState>, { adapter = defaultAdapter }: IDefaultOptions = defaultOptions
 ) {
   if (typeof epic !== 'function') {
     throw new TypeError('You must provide a root Epic to createEpicMiddleware');
@@ -37,11 +36,12 @@ export function createEpicMiddleware<TActionInput extends Action<any>, TActionOu
 
   const input$ = new Subject<Action<any>>();
   const action$: ActionsObservable<Action<any>> = adapter.input(
-    new ActionsObservable(input$),
+    new ActionsObservable(input$)
   );
   const epic$ = new Subject<TEpic<TActionInput, TActionOutput, TStoreState>>();
 
   let store: Store<TStoreState>;
+  // tslint:disable-next-line: variable-name
   const epicMiddleware = (_store: Store<TStoreState>) => {
     store = _store;
 

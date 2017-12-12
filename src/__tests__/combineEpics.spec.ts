@@ -1,4 +1,3 @@
-/* tslint:disable: no-shadowed-variable */
 import { expect } from 'chai';
 import { Action } from 'redux-actions';
 import { map } from 'rxjs/operator/map';
@@ -17,16 +16,18 @@ type TGenericEpic = TEpic<TGenericAction, TGenericAction, any>;
 
 describe('combineEpics', () => {
   it('should combine epics', () => {
+    // tslint:disable-next-line: no-shadowed-variable
     const epic1: TGenericEpic = (actions, store) =>
       actions.ofType('ACTION1')
         .__invoke(map, (action: TGenericAction) => ({ type: 'DELEGATED1', action, store }));
+    // tslint:disable-next-line: no-shadowed-variable
     const epic2: TGenericEpic = (actions, store) =>
       actions.ofType('ACTION2')
         .__invoke(map, (action: TGenericAction) => ({ type: 'DELEGATED2', action, store }));
 
     const epic = combineEpics(
       epic1,
-      epic2,
+      epic2
     );
 
     const store = { I: 'am', a: 'store' };
@@ -52,7 +53,7 @@ describe('combineEpics', () => {
 
     const rootEpic = combineEpics(
       epic1,
-      epic2,
+      epic2
     );
 
     rootEpic(1, 2, 3, 4)

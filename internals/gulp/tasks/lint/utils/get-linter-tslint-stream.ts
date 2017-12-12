@@ -28,6 +28,6 @@ export const getLinterTslintStream = ({ src, srcOpts }: IGetLinterTslintStreamAr
       emitError: true,
       reportLimit: 0,
       summarizeFailureOutput: true,
-    },
+    }
     ));
 };

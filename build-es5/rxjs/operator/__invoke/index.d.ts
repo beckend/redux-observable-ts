@@ -1,4 +1,5 @@
 /**
  * Temporary operator until something official comes along
  */
-export declare function __invoke<TFN>(fn: TFN, ...args: any[]): any;
+import { Observable } from 'rxjs';
+export declare function __invoke<TFn extends Function>(this: Observable<any>, fn: TFn, ...args: any[]): any;

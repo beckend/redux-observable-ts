@@ -6,7 +6,6 @@
 # A Boilerplate to create npm modules using typescript
 
 ### Requires
-- `>npm@4.x` because of `prepare` script in `package.json`.
 - `npm -g i gulp-cli jest-cli`.
 
 ### Usage

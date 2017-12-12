@@ -10,6 +10,6 @@ import { TEpic } from './model';
 export const combineEpics = <TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState>(...epics: Array<TEpic<TActionInput, TActionOutput, TStoreState>>) => {
   return (...epicArgs: any[]): Observable<TActionOutput> =>
     merge(
-      ...epics.map((epic: any) => epic(...epicArgs)),
+      ...epics.map((epic: any) => epic(...epicArgs))
     );
 };

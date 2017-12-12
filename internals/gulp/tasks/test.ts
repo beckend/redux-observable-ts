@@ -1,10 +1,6 @@
-/* tslint:disable: no-console */
-/**
- * Test
- */
 import { cmdSpawn } from 'cmd-spawn';
 // import {
-//  PATH_PACKAGE,
+//   PATH_PACKAGE,
 // } from '../config';
 import * as debugMod from 'debug';
 import * as gulp from 'gulp';
@@ -15,6 +11,7 @@ gulp.task('test', async () => {
   debug(`running: ${cmd}`);
   const r = await cmdSpawn(cmd, { buffer: true });
   if (r) {
+    // tslint:disable-next-line: no-console
     console.log(r.stdout);
   }
   debug(`finish: ${cmd}`);

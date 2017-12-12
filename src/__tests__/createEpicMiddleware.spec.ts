@@ -1,4 +1,3 @@
-/* tslint:disable: no-shadowed-variable */
 /**
  * We need to import the operators separately and not add them to the Observable
  * prototype, otherwise we might accidentally cover-up that the source we're
@@ -30,6 +29,7 @@ describe('createEpicMiddleware', () => {
     const reducer: Reducer<any> = (state: TActionArr = [], action: TGenericAction) => state.concat(action);
     const epic = sinon.stub().returns(empty());
     const epicMiddleware = createEpicMiddleware(epic);
+    // tslint:disable-next-line: no-shadowed-variable
     const mockMiddleware: any = <S>(store: MiddlewareAPI<S>) => () => () => {
       // tslint:disable-next-line
       expect(epic.calledOnce).to.be.true;
@@ -48,7 +48,7 @@ describe('createEpicMiddleware', () => {
         action$.ofType('FIRE_1')
           .__invoke(mapTo, { type: 'ACTION_1' }),
         action$.ofType('FIRE_2')
-          .__invoke(mapTo, { type: 'ACTION_2' }),
+          .__invoke(mapTo, { type: 'ACTION_2' })
       );
 
     const middleware = createEpicMiddleware(epic);
@@ -79,7 +79,7 @@ describe('createEpicMiddleware', () => {
         action$.ofType('FIRE_GENERIC')
           .__invoke(mapTo, { type: 'EPIC_1_GENERIC' }),
         action$.ofType(EPIC_END)
-          .__invoke(mapTo, { type: 'CLEAN_UP_AISLE_3' }),
+          .__invoke(mapTo, { type: 'CLEAN_UP_AISLE_3' })
       );
     const epic2: TEpic<TGenericAction, TGenericAction, any> = (action$) =>
       mergeStatic<any>(
@@ -89,7 +89,7 @@ describe('createEpicMiddleware', () => {
         action$.ofType('FIRE_4')
           .__invoke(mapTo, { type: 'ACTION_4' }),
         action$.ofType('FIRE_GENERIC')
-          .__invoke(mapTo, { type: 'EPIC_2_GENERIC' }),
+          .__invoke(mapTo, { type: 'EPIC_2_GENERIC' })
       );
 
     const middleware = createEpicMiddleware(epic1);
