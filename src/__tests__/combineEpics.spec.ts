@@ -1,29 +1,28 @@
 import { expect } from 'chai';
 import { Action } from 'redux-actions';
-import { map } from 'rxjs/operator/map';
-import { toArray } from 'rxjs/operator/toArray';
+import { map } from 'rxjs/operators/map';
+import { toArray } from 'rxjs/operators/toArray';
 import { Subject } from 'rxjs/Subject';
 import * as sinon from 'sinon';
 import { ActionsObservable, combineEpics } from '../';
 import {
   TEpic,
 } from '../model';
-import '../rxjs/add/__invoke';
 
 type TGenericAction = Action<any>;
 type TActionArr = TGenericAction[];
-type TGenericEpic = TEpic<TGenericAction, TGenericAction, any>;
+type TGenericEpic = TEpic<TGenericAction, TGenericAction, any, any>;
 
 describe('combineEpics', () => {
   it('should combine epics', () => {
     // tslint:disable-next-line: no-shadowed-variable
     const epic1: TGenericEpic = (actions, store) =>
       actions.ofType('ACTION1')
-        .__invoke(map, (action: TGenericAction) => ({ type: 'DELEGATED1', action, store }));
+        .pipe(map((action) => ({ type: 'DELEGATED1', action, store })));
     // tslint:disable-next-line: no-shadowed-variable
     const epic2: TGenericEpic = (actions, store) =>
       actions.ofType('ACTION2')
-        .__invoke(map, (action: TGenericAction) => ({ type: 'DELEGATED2', action, store }));
+        .pipe(map((action) => ({ type: 'DELEGATED2', action, store })));
 
     const epic = combineEpics(
       epic1,
@@ -57,8 +56,8 @@ describe('combineEpics', () => {
     );
 
     rootEpic(1, 2, 3, 4)
-      .__invoke(toArray)
-      .subscribe((values: any) => {
+      .pipe(toArray())
+      .subscribe((values) => {
         expect(values).to.deep.equal(['first', 'second']);
 
         expect(epic1.callCount).to.equal(1);

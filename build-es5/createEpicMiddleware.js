@@ -1,20 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var map_1 = require("rxjs/operator/map");
-var switchMap_1 = require("rxjs/operator/switchMap");
+var map_1 = require("rxjs/operators/map");
+var switchMap_1 = require("rxjs/operators/switchMap");
 var Subject_1 = require("rxjs/Subject");
 var ActionsObservable_1 = require("./ActionsObservable");
 var EPIC_END_1 = require("./EPIC_END");
-require("./rxjs/add/__invoke");
 var defaultAdapter = {
     input: function (action$) { return action$; },
     output: function (action$) { return action$; },
 };
 var defaultOptions = {
     adapter: defaultAdapter,
+    dependencies: {},
 };
+// tslint:disable-next-line: max-line-length
 function createEpicMiddleware(epic, _a) {
-    var _b = (_a === void 0 ? defaultOptions : _a).adapter, adapter = _b === void 0 ? defaultAdapter : _b;
+    var _b = _a === void 0 ? defaultOptions : _a, _c = _b.adapter, adapter = _c === void 0 ? defaultAdapter : _c, _d = _b.dependencies, dependencies = _d === void 0 ? {} : _d;
     if (typeof epic !== 'function') {
         throw new TypeError('You must provide a root Epic to createEpicMiddleware');
     }
@@ -27,9 +28,24 @@ function createEpicMiddleware(epic, _a) {
         store = _store;
         return function (next) {
             epic$
-                .__invoke(map_1.map, function (epicArg) { return epicArg(action$, store); })
-                .__invoke(switchMap_1.switchMap, function (actionArg$) { return adapter.output(actionArg$); })
-                .subscribe(store.dispatch);
+                .pipe(map_1.map(function (epicArg) {
+                var output$ = epicArg(action$, store, dependencies);
+                if (!output$) {
+                    // tslint:disable-next-line: max-line-length
+                    throw new TypeError("Your root Epic \"" + (epic.name || '<anonymous>') + "\" does not return a stream. Double check you're not missing a return statement!");
+                }
+                return output$;
+            }))
+                .pipe(switchMap_1.switchMap(function (actionArg$) { return adapter.output(actionArg$); }))
+                .subscribe(function (action) {
+                try {
+                    store.dispatch(action);
+                }
+                catch (err) {
+                    // tslint:disable-next-line: no-console
+                    console.error(err);
+                }
+            });
             // Setup initial root epic
             epic$.next(epic);
             return function (action) {

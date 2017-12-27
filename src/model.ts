@@ -6,8 +6,8 @@ import { ActionsObservable } from './ActionsObservable';
 /**
  * epic
  */
-export type TEpic<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState> =
-  (action$: ActionsObservable<TActionInput>, store: Store<TStoreState>) => Observable<TActionOutput>;
+export type TEpic<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState, TDeps> =
+  (action$: ActionsObservable<TActionInput>, store: Store<TStoreState>, deps: TDeps) => Observable<TActionOutput>;
 
 /**
  * createEpicMiddleware adapter
@@ -21,6 +21,6 @@ export interface IEpicAdapter {
  * epic middleware returned from createEpicMiddleware
  */
 // tslint:disable-next-line: max-line-length
-export interface IEpicMiddleware<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState> extends Middleware {
-  readonly replaceEpic: (nextEpic: TEpic<TActionInput, TActionOutput, TStoreState>) => void;
+export interface IEpicMiddleware<TActionInput extends Action<any>, TActionOutput extends Action<any>, TStoreState, TDeps> extends Middleware {
+  readonly replaceEpic: (nextEpic: TEpic<TActionInput, TActionOutput, TStoreState, TDeps>) => void;
 }

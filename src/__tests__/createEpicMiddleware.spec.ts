@@ -12,14 +12,13 @@ import { applyMiddleware, createStore } from 'redux';
 import { Action } from 'redux-actions';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
-import { mapTo } from 'rxjs/operator/mapTo';
-import { mergeStatic } from 'rxjs/operator/merge';
+import { mapTo } from 'rxjs/operators/mapTo';
+import { mergeStatic } from 'rxjs/operators/merge';
 import * as sinon from 'sinon';
 import { ActionsObservable, createEpicMiddleware, EPIC_END } from '../index';
 import {
   TEpic,
 } from '../model';
-import '../rxjs/add/__invoke';
 
 type TGenericAction = Action<any>;
 type TActionArr = TGenericAction[];
@@ -46,9 +45,9 @@ describe('createEpicMiddleware', () => {
     const epic: TEpic<TGenericAction, TGenericAction, any> = (action$) =>
       mergeStatic(
         action$.ofType('FIRE_1')
-          .__invoke(mapTo, { type: 'ACTION_1' }),
+          .pipe(mapTo({ type: 'ACTION_1' })),
         action$.ofType('FIRE_2')
-          .__invoke(mapTo, { type: 'ACTION_2' })
+          .pipe(mapTo({ type: 'ACTION_2' }))
       );
 
     const middleware = createEpicMiddleware(epic);
@@ -73,23 +72,23 @@ describe('createEpicMiddleware', () => {
       mergeStatic<any>(
         of({ type: 'EPIC_1' }),
         action$.ofType('FIRE_1')
-          .__invoke(mapTo, { type: 'ACTION_1' }),
+          .pipe(mapTo({ type: 'ACTION_1' })),
         action$.ofType('FIRE_2')
-          .__invoke(mapTo, { type: 'ACTION_2' }),
+          .pipe(mapTo({ type: 'ACTION_2' })),
         action$.ofType('FIRE_GENERIC')
-          .__invoke(mapTo, { type: 'EPIC_1_GENERIC' }),
+          .pipe(mapTo({ type: 'EPIC_1_GENERIC' })),
         action$.ofType(EPIC_END)
-          .__invoke(mapTo, { type: 'CLEAN_UP_AISLE_3' })
+          .pipe(mapTo({ type: 'CLEAN_UP_AISLE_3' }))
       );
     const epic2: TEpic<TGenericAction, TGenericAction, any> = (action$) =>
       mergeStatic<any>(
         of({ type: 'EPIC_2' }),
         action$.ofType('FIRE_3')
-          .__invoke(mapTo, { type: 'ACTION_3' }),
+          .pipe(mapTo({ type: 'ACTION_3' })),
         action$.ofType('FIRE_4')
-          .__invoke(mapTo, { type: 'ACTION_4' }),
+          .pipe(mapTo({ type: 'ACTION_4' })),
         action$.ofType('FIRE_GENERIC')
-          .__invoke(mapTo, { type: 'EPIC_2_GENERIC' })
+          .pipe(mapTo({ type: 'EPIC_2_GENERIC' }))
       );
 
     const middleware = createEpicMiddleware(epic1);
